@@ -118,8 +118,7 @@ gradevar<-function(data,coursecol,coursename,instructorcol,instructorname,succes
   newdf1$measure<-factor(newdf1$measure, levels=c("Success","Mastery","Drop"))
 
   newdf1<-newdf1[with(newdf1,order(measure,Rates)),]
-  temp_plot<-"test"
-  temp_plot<<-newdf1%>%arrange(measure,Rates)%>%
+  temp_plot<-newdf1%>%arrange(measure,Rates)%>%
     ggplot(aes(rank1,Rates,group=measure)) +
     geom_point(aes(color=measure)) +
     geom_line(aes(color=measure),size=1.3)+
@@ -140,7 +139,7 @@ gradevar<-function(data,coursecol,coursename,instructorcol,instructorname,succes
          subtitle=paste0("See horizontal axis for your ",empid," data"),
          y="Rate (%)",
          x=paste0("Instructors with more than ", limit, " students"))
-
+  temp_plot<<-temp_plot
   fname<-paste0(empid," Grading Variability For - ",coursetitle," - ",Sys.Date(),".png")
   fname<<-paste0(empid," Grading Variability For - ",coursetitle," - ",Sys.Date(),".png")
   #ggsave(fname,plot=temp_plot,width=11, height = 8,units="in")
@@ -154,7 +153,6 @@ gradevar<-function(data,coursecol,coursename,instructorcol,instructorname,succes
     print("datafile:temp_plot");
     print(temp_plot)
   }
-
 }
 
 
